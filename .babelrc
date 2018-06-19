@@ -1,0 +1,42 @@
+{
+    "presets" : [
+        [
+            "env", {
+                "targets": {
+                    "browsers": [ "last 2 versions" ],
+                    "modules" : false,
+                    "node" : true,
+                    "useBuiltIns":"usage"
+                }
+            }
+        ],
+        "react"
+    ],
+    "plugins" : [
+        "syntax-dynamic-import",
+        "transform-object-rest-spread",
+        [ "transform-class-properties" ]
+    ],
+    "env": {
+        "production": {
+            "plugins": [
+                [ "minify-dead-code-elimination" ],
+                [ "minify-constant-folding" ],
+                [ "minify-mangle-names", { "exclude": { "classList": true, "bar": true} } ]
+            ]
+        },
+        "test": {
+            "presets": [["env"], "react"],
+            "plugins": [
+                [ "transform-class-properties" ],
+                "transform-object-rest-spread",
+                [ "module-resolver", {
+                    "root": ["./"],
+                    "alias": {
+                      "config": "./config/test.env.js"
+                    }
+                } ]
+            ]
+        }
+    }
+}
